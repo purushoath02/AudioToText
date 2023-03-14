@@ -3,7 +3,7 @@ from app import app
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-	
+from VideoToSRT import *
 @app.route('/')
 def upload_form():
 	return render_template('upload.html')
@@ -22,6 +22,7 @@ def upload_video():
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_video filename: ' + filename)
 		flash('Video successfully uploaded and displayed below')
+		VideoToSrt(filename)
 		return render_template('upload.html', filename=filename)
 
 @app.route('/display/<filename>')
