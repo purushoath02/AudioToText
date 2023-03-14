@@ -20,9 +20,9 @@ def upload_video():
 	else:
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_video filename: ' + filename)
+		print('upload_video filename: ' + filename)
 		flash('Video successfully uploaded and displayed below')
-		VideoToSrt(filename)
+		VideoToSrt('static/uploads/'+filename)
 		return render_template('upload.html', filename=filename)
 
 @app.route('/display/<filename>')
