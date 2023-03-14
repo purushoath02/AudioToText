@@ -9,13 +9,13 @@ import os
 
 def VideoToSrt(filename):
     video = mp.VideoFileClip(filename)
-    video.audio.write_audiofile(r"sample.wav")
+    video.audio.write_audiofile(r"temp/sample.wav")
     
     #audio = video.audio
     #audio.write_audiofile("sample.WAV")
     ''
     r = sr.Recognizer()
-    with sr.AudioFile('sample.wav') as source:
+    with sr.AudioFile('temp/sample.wav') as source:
         audio_data = r.record(source)
         text = r.recognize_google(audio_data)
 
