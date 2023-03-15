@@ -22,7 +22,7 @@ def upload_video():
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		print('upload_video filename: ' + filename)
 		flash('Video successfully uploaded and displayed below')
-		VideoToSrt('static/uploads/'+filename)
+		VideoToSrt(filename)
 		return render_template('upload.html', filename=filename)
 
 @app.route('/display/<filename>')

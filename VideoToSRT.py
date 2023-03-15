@@ -8,7 +8,7 @@ import os
 
 
 def VideoToSrt(filename):
-    video = mp.VideoFileClip(filename)
+    video = mp.VideoFileClip('static/uploads/'+filename)
     video.audio.write_audiofile(r"temp/sample.wav")
     
     #audio = video.audio
