@@ -2,6 +2,8 @@ import moviepy.editor as mp
 import pysrt
 import speech_recognition as sr
 import os
+from moviepy.video.tools.subtitles import SubtitlesClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 #from app import app
 
 # Load the video file
@@ -37,10 +39,27 @@ def VideoToSrt(filename):
         )
         srt_file.append(subtitle)
         srt_index += 1
-
-    srt_file.save("static/subtitles/subtitle_"+filename+".srt")
-
+    srt_path = "static/subtitles/subtitle_"+filename[:-3]+"srt"
+    srt_file.save(srt_path)
+    subtitle = SubtitlesClip(srt_path)
+    subtitle = subtitle.set_position(("center", "bottom")).set_duration(video.duration)
+    final_clip = mp.CompositeVideoClip([video, subtitle])
+    final_clip.write_videofile('static/uploads/final_'+filename)
+    return "final_"+filename
     
     #video = video.set_audio('sample.wav')
-    video = video.set_subtitles("subtitles.srt")
+    #video = video.set_subtitles("subtitles.srt")
     #video.write_videofile(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+
+#video = mp.VideoFileClip("video.mp4")
+
+# Load the subtitle file
+#subtitle = mp.SubtitlesClip("subtitle.srt")
+
+# Set the position and duration of the subtitle
+
+
+# Combine the video and subtitle clips
+
+
+# Write the final clip to a new file
